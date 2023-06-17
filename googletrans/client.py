@@ -244,7 +244,7 @@ class Translator:
 
         return result
 
-    def detect(self, text, **kwargs):
+    async def detect(self, text, **kwargs):
         """Detect language of the input text
 
         :param text: The source text(s) whose language you want to identify.
@@ -278,11 +278,11 @@ class Translator:
         if isinstance(text, list):
             result = []
             for item in text:
-                lang = self.detect(item)
+                lang = await self.detect(item)
                 result.append(lang)
             return result
 
-        data, response = self._translate(text, 'en', 'auto', kwargs)
+        data, response = await self._translate(text, 'en', 'auto', kwargs)
 
         # actual source language that will be recognized by Google Translator when the
         # src passed is equal to auto.
